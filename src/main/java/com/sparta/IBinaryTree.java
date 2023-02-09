@@ -1,6 +1,6 @@
 package com.sparta;
 
-package com.sparta.mg.binarytree;
+
 
 public interface IBinaryTree {
     int getRootElement();
