@@ -1,15 +1,28 @@
 package com.sparta;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-//        BinaryTree binTree = new BinaryTree(15);
-//        binTree.addElement(17);
-//        binTree.addElement(13);
-//        binTree.addElement(4);
-//        binTree.addElement(9);
-//        System.out.println(binTree.findElement(15));
-//        System.out.println(binTree.findElement(3));
-//        System.out.println(binTree.findElement(17));
-//        System.out.println(binTree.findElement(24));
+        BinaryTree binTree = new BinaryTree();
+        binTree.addElement(17);
+        binTree.addElement(13);
+        binTree.addElement(4);
+        binTree.addElement(9);
+        binTree.addElement(19);
+        binTree.addElement(29);
+        binTree.addElement(18);
+        System.out.println(binTree.findElement(15));//false
+        System.out.println(binTree.findElement(3));//false
+        System.out.println(binTree.findElement(17));//true
+        System.out.println(binTree.findElement(24));//false
+        System.out.println(binTree.findElement(9));//true
+        System.out.println(binTree.findElement(19));//true
+        System.out.println(binTree.findElement(29));//true
+        System.out.println(Arrays.toString(binTree.getSortedTreeAsc()));
+        System.out.println(binTree.getLeftChild(13));
+        System.out.println(binTree.getLeftChild(19));
+        System.out.println(binTree.getLeftChild(18));
+
     }
 }

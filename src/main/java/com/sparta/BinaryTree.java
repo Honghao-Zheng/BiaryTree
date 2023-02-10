@@ -1,11 +1,16 @@
 package com.sparta;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class BinaryTree implements IBinaryTree{
     Node root;
     Node currentNode;
 
 
-
+//    ArrayList<Integer> arrOfInt=ArrayList<Integer>();
 
     @Override
     public int getRootElement() {
@@ -14,7 +19,24 @@ public class BinaryTree implements IBinaryTree{
 
     @Override
     public int getNumberOfElements() {
-        return 0;
+        if (root == null) {
+            return 0;
+        }
+        int total = 1;
+        Node tempNode = currentNode;
+        if (!currentNode.isLeftChildEmpty()) {
+            currentNode = currentNode.getLeftChild();
+            total += getNumberOfElements();
+        }
+        currentNode = tempNode;
+        if (!currentNode.isRightChildEmpty()) {
+            currentNode = currentNode.getRightChild();
+            total += getNumberOfElements();
+        }
+
+        currentNode = tempNode;
+
+        return total;
     }
 
 
@@ -64,7 +86,6 @@ leave these comment to now
                 addElement(element);
             }
         }
-
         if(element>currentNode.getValue()){
             if(currentNode.getRightChild()==null){
                 currentNode.setRightChild(new Node(element));
@@ -73,6 +94,8 @@ leave these comment to now
                 addElement(element);
             }
         }
+//        arrOfInt.add(element);
+        currentNode=root;
     }
 
     @Override
@@ -83,59 +106,123 @@ leave these comment to now
     }
 
     @Override
-//    public boolean findElement(int value) {
-//        Node currentNode = root;
-//        boolean exists = true;
-//        while (currentNode.getValue() != value) {
-//            if (value > currentNode.getValue()) {
-//                if (!currentNode.isRightChildEmpty()) {
-//                    currentNode = currentNode.getRightChild();
-//                } else {
-//                    exists = false;
-//                    break;
-//                }
-//            } else {
-//                if (!currentNode.isLeftChildEmpty()) {
-//                    currentNode = currentNode.getLeftChild();
-//                } else {
-//                    exists = false;
-//                    break;
-//                }
-//            }
-//        }
-//        return exists;
-//    }
     public boolean findElement(int value) {
-        BinaryTree tree=new BinaryTree(value)
-        if (currentNode.getValue() == value) {
+        Node foundNode=findNode(value);
+        if (foundNode ==null){
+            return false;
+        } else{
             return true;
-        } else {
-            if (!currentNode.isLeftChildEmpty())
-                return findElement(currentNode.getLeftChild().getValue());
-            else if (!currentNode.isRightChildEmpty())
-                return findElement(currentNode.getRightChild().getValue());
         }
-        return false;
     }
 
+public Node findNode(int value){
+    if(currentNode == null){
+        currentNode=root;
+        return null;
+    } else{
+        if(currentNode.getValue() == value){
+            Node storedNode=currentNode;
+            currentNode=root;
+            return storedNode;
+        }
+        else if (value<currentNode.getValue()){
+            currentNode=currentNode.getLeftChild();
+            return findNode(value);
+        }
+        else {
+            currentNode=currentNode.getRightChild();
+            return findNode(value);
+        }
+    }
+}
 
     @Override
     public int getLeftChild(int element) {
-        return 0;
+        Node foundNode=findNode(element);
+        if (foundNode == null){
+            return 0;
+        } else{
+            Node leftChild=foundNode.getLeftChild();
+            if (leftChild==null){
+                return 0;
+            } else {
+                return leftChild.getValue();
+            }
+        }
     }
 
     @Override
     public int getRightChild(int element) {
-        return 0;
+        Node foundNode=findNode(element);
+        if (foundNode == null){
+            return 0;
+        } else{
+            Node rightChild=foundNode.getLeftChild();
+            if (rightChild==null){
+                return 0;
+            } else {
+                return rightChild.getValue();
+            }
+        }
     }
 
     @Override
     public int[] getSortedTreeAsc() {
-        return new int[0];
+        List<Integer> integerList = new ArrayList<Integer>();
+        Node tempNode = currentNode;
+
+        int[] leftArray;
+        int[] rightArray;
+
+        if (!currentNode.isLeftChildEmpty()) {
+            currentNode = currentNode.getLeftChild();
+            leftArray = getSortedTreeAsc();
+        } else {
+            leftArray = new int[0];
+        }
+        currentNode = tempNode;
+        if (!currentNode.isRightChildEmpty()) {
+            currentNode = currentNode.getRightChild();
+            rightArray = getSortedTreeAsc();
+        } else {
+            rightArray = new int[0];
+        }
+        currentNode = tempNode;
+
+        int[] value = new int[1];
+        value[0] = currentNode.getValue();
+        int[] temp = IntStream.concat(Arrays.stream(leftArray), Arrays.stream(value)).toArray();
+        int[] result = IntStream.concat(Arrays.stream(temp), Arrays.stream(rightArray)).toArray();
+        return result;
     }
 
     @Override
     public int[] getSortedTreeDesc() {
-        return new int[0];
+        Node tempNode = currentNode;
+
+        int[] leftArray;
+        int[] rightArray;
+
+        if (!currentNode.isRightChildEmpty()) {
+            currentNode = currentNode.getRightChild();
+            leftArray = getSortedTreeDesc();
+        } else {
+            leftArray = new int[0];
+        }
+        currentNode = tempNode;
+
+        if (!currentNode.isLeftChildEmpty()) {
+            currentNode = currentNode.getLeftChild();
+            rightArray = getSortedTreeDesc();
+        } else {
+            rightArray = new int[0];
+        }
+        currentNode = tempNode;
+
+        int[] value = new int[1];
+        value[0] = currentNode.getValue();
+        int[] temp = IntStream.concat(Arrays.stream(leftArray), Arrays.stream(value)).toArray();
+        int[] result = IntStream.concat(Arrays.stream(temp), Arrays.stream(rightArray)).toArray();
+        return result;
     }
 }
