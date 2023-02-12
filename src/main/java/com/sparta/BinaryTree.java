@@ -12,6 +12,22 @@ public class BinaryTree implements IBinaryTree{
 
 //    ArrayList<Integer> arrOfInt=ArrayList<Integer>();
 
+    public Node getRoot() {
+        return root;
+    }
+
+    public void setRoot(Node root) {
+        this.root = root;
+    }
+
+    public Node getCurrentNode() {
+        return currentNode;
+    }
+
+    public void setCurrentNode(Node currentNode) {
+        this.currentNode = currentNode;
+    }
+
     @Override
     public int getRootElement() {
         return this.root.getValue();

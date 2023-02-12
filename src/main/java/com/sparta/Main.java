@@ -12,6 +12,7 @@ public class Main {
         binTree.addElement(19);
         binTree.addElement(29);
         binTree.addElement(18);
+        binTree.addElement(1);
         System.out.println(binTree.findElement(15));//false
         System.out.println(binTree.findElement(3));//false
         System.out.println(binTree.findElement(17));//true
