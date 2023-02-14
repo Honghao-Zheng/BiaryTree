@@ -1,10 +1,19 @@
 package com.sparta;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
+
+import com.sparta.extension.ChildNotFoundException;
+import com.sparta.logging.logWrapper;
+
 
 public class Main {
+    private static final Logger logger=Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
-        BinaryTree binTree = new BinaryTree();
+
+        logWrapper.logIt(logger);
+//        BinaryTree binTree=new ExampleTree().createTree();
+        BinaryTree binTree = new BinaryTree(logger);
         binTree.addElement(17);
         binTree.addElement(13);
         binTree.addElement(4);
@@ -21,9 +30,13 @@ public class Main {
         System.out.println(binTree.findElement(19));//true
         System.out.println(binTree.findElement(29));//true
         System.out.println(Arrays.toString(binTree.getSortedTreeAsc()));
-        System.out.println(binTree.getLeftChild(13));
-        System.out.println(binTree.getLeftChild(19));
-        System.out.println(binTree.getLeftChild(18));
+//       try {
+//           System.out.println(binTree.getRightChild(13));
+//       } catch (ChildNotFoundException e){
+//           e.printStackTrace();
+//       }
+//        System.out.println(binTree.getLeftChild(19));
+//        System.out.println(binTree.getLeftChild(18));
 
     }
 }
