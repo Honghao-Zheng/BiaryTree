@@ -19,6 +19,43 @@ public class ProgramTest {
     int result=tree1.getRootElement();
     Assertions.assertEquals(expected,result);
 }
+
+    @Test
+    @DisplayName("Test getNumberOfElement given the exampleTree of size of 8")
+    void testGetNumberOfElementGivenTreeSize8(){
+        BinaryTree binTree = new ExampleTree().createTree();
+        int result=binTree.getNumberOfElements();
+        int expected=8;
+        Assertions.assertEquals(expected,result);
+    }
+
+//    @Test
+//    @DisplayName("Test addElement given the exampleTree")
+//    void testAddElement(){
+//        BinaryTree expectedBinaryTree = new ExampleTree().createTree();
+//        BinaryTree resultBinaryTree=new BinaryTree();
+//        resultBinaryTree.addElement(17);
+//        resultBinaryTree.addElement(13);
+//        resultBinaryTree.addElement(4);
+//        resultBinaryTree.addElement(9);
+//        resultBinaryTree.addElement(19);
+//        resultBinaryTree.addElement(29);
+//        resultBinaryTree.addElement(18);
+//        resultBinaryTree.addElement(1);
+//        Assertions.assertEquals(expectedBinaryTree,resultBinaryTree);
+//    }
+
+//    @Test
+//    @DisplayName("Test addElement add root")
+//    void testAddElementAddRoot(){
+//        BinaryTree expectedBinaryTree = new BinaryTree();
+//        BinaryTree resultBinaryTree=new BinaryTree();
+//        resultBinaryTree.addElement(17);
+//        expectedBinaryTree.setRoot(new Node(17));
+//        expectedBinaryTree.setCurrentNode(new Node(17));
+//        Assertions.assertEquals(expectedBinaryTree,resultBinaryTree);
+//    }
+
     @ParameterizedTest
     @ValueSource(ints = {17,13,4,1,9,19,18,29})
     @DisplayName("findElement can finds existing element in the tree")
@@ -109,4 +146,21 @@ public class ProgramTest {
         Assertions.assertThrows(ChildNotFoundException.class, () -> binTree.getLeftChild(12));
     }
 
+@Test
+    @DisplayName("test the sortAscend")
+    void testSortAscend(){
+        int[] expected={1,4,9,13,17,18,19,29};
+    BinaryTree testTree = new ExampleTree().createTree();
+        int[] actual=testTree.getSortedTreeAsc();
+        Assertions.assertArrayEquals(expected,actual);
+}
+
+    @Test
+    @DisplayName("test the sortDescend")
+    void testSortDescend(){
+        int[] expected={29,19,18,17,13,9,4,1};
+        BinaryTree testTree = new ExampleTree().createTree();
+        int[] actual=testTree.getSortedTreeDesc();
+        Assertions.assertArrayEquals(expected,actual);
+    }
 }

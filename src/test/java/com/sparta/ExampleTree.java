@@ -14,7 +14,7 @@ public class ExampleTree {
      Node node29=new Node(29);
      Node node17=new Node(17);
      Node node13=new Node(13);
-    BinaryTree exampleTree=new BinaryTree(logger);
+    BinaryTree exampleTree=new BinaryTree();
 
     public ExampleTree() {
         this.node4.setLeftChild(node1);
@@ -26,6 +26,7 @@ public class ExampleTree {
         this.node17.setRightChild(node19);
         this.exampleTree.setRoot(this.node17);
         this.exampleTree.setCurrentNode(this.node17);
+
     }
     public BinaryTree createTree(){
         return this.exampleTree;
